@@ -1,13 +1,13 @@
 // StrategyFactory Quant Lab — data snapshot
 // Generated from live trader.dev pulls (list_strategies, get_strategy, backtest results)
 const QL_DATA = {
-  generatedAt: "2026-07-09T20:30:00Z",
+  generatedAt: "2026-07-09T21:15:00Z",
   portfolio: {
     liveBots: 3,
     paperBots: 1,
     candidatesThisWeek: 8,
     rejectedThisWeek: 6,
-    creditsRemaining: 74363,
+    creditsRemaining: 74348,
   },
   bots: [
     { id: "zec-ut-p5", name: "ZEC UT P5", symbol: "ZECUSDT", tf: "15m", status: "active", tier: "live",
@@ -130,4 +130,25 @@ const QL_DATA = {
       warnings: ["OOS window Sharpe -0.23, DD 33.2%", "12mo window looked strong (Sharpe 2.64) — classic instability pattern"],
       backtests: ["12mo: +100.5% net, Sharpe 2.64", "OOS (Jul24-Jul25): -12.0% net, Sharpe -0.23"] },
   },
+  // Fingerprint register from Trading Brain Vault (Home.md "Schon getestet") — Symbol|TF|Kategorie|Indikatoren
+  // Source of truth for what's already been tested, to avoid repeating backtest ideas in a loop.
+  alreadyTried: [
+    { fingerprint: "1000BONKUSDT|15|breakout|atr,ema,sma", count: 1, verdicts: "unprofitable", names: "RESEARCH-2026-07-09-BONK-SqueezeBreakout" },
+    { fingerprint: "BTCUSDT|240|breakout|atr,donchian", count: 1, verdicts: "excluded_optimizer_run", names: "Vol Squeeze-Release Breakout BTC 4h (Research Desk #2)" },
+    { fingerprint: "BTCUSDT|60|mean_reversion|bollinger,rsi", count: 1, verdicts: "profitable_only", names: "BTC Mean-Reversion Bollinger+RSI (Original)" },
+    { fingerprint: "BTCUSDT|60|mean_reversion|none", count: 1, verdicts: "excluded_optimizer_run", names: "BTC Mean-Reversion Bollinger+RSI (Optimiert, 13 Trades)" },
+    { fingerprint: "BTCUSDT|60|momentum|ema,rsi", count: 1, verdicts: "unprofitable", names: "BTC Momentum EMA Crossover 20/50 + RSI" },
+    { fingerprint: "BTCUSDT|?|breakout|adx,donchian", count: 1, verdicts: "credible", names: "TF-DonchianADX-v8 (Browse-Katalog)" },
+    { fingerprint: "BTCUSDT|?|other|none", count: 1, verdicts: "credible", names: "BTC Candle Range Theory (Browse-Katalog)" },
+    { fingerprint: "DOGEUSDT|240|mean_reversion|chaikin", count: 1, verdicts: "credible", names: "DOGE Chaikin Z-Score MR v2 (Browse-Katalog)" },
+    { fingerprint: "ETHUSDT|60|other|none", count: 2, verdicts: "credible, excluded_optimizer_run", names: "Realized-Vol Risk Overlay -- Liquidity Swing v5 (90pct/0.5x, LIVE DEPLOYED); Realized-Vol Risk Overlay -- Hilbert F36 (extra dampening, ZURUECKGESTELLT)" },
+    { fingerprint: "HYPEUSDT|15|other|adx,t3", count: 1, verdicts: "credible", names: "HYPE DemonDays PH Cross ADX-DI Filter (Browse-Katalog)" },
+    { fingerprint: "HYPEUSDT|15|other|none", count: 1, verdicts: "credible", names: "HYPE UT P5 (Cross-Coin-Test, identischer Code)" },
+    { fingerprint: "HYPEUSDT|240|mean_reversion|atr,ibs,sma", count: 1, verdicts: "credible", names: "HYPE IBS MeanRev 4h" },
+    { fingerprint: "ORDIUSDT|5|trend_following|adx,atr,sma,supertrend", count: 1, verdicts: "credible", names: "ORDI 5m Q-Trend v3 (Original p=30 mult=1.2)" },
+    { fingerprint: "ZECUSDT|15|other|ema,rsi,trailing_stop", count: 1, verdicts: "credible", names: "ZEC UT P5 (Original Compounding)" },
+    { fingerprint: "ZECUSDT|15|other|none", count: 1, verdicts: "credible", names: "ZEC UT P5 (Out-of-Sample Verify)" },
+    { fingerprint: "ZECUSDT|15|trend_following|trailing_stop", count: 1, verdicts: "excluded_optimizer_run", names: "Realized-Vol Risk Overlay -- ZEC UT P5 (rekalibriert, VERWORFEN)" },
+    { fingerprint: "ZECUSDT|240|breakout|none", count: 1, verdicts: "profitable_only", names: "Vol Squeeze-Release Breakout ZEC 4h (Bugfix-Vergleich)" },
+  ],
 };

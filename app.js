@@ -147,6 +147,26 @@
     aqList.appendChild(row);
   });
 
+  // ---------------- FINGERPRINT REGISTER (already tried) ----------------
+  const triedList = document.getElementById("tried-list");
+  if(triedList && D.alreadyTried && D.alreadyTried.length){
+    const rows = D.alreadyTried.map(t => `
+      <tr>
+        <td><code>${t.fingerprint}</code></td>
+        <td>${t.count}</td>
+        <td>${t.verdicts}</td>
+        <td>${t.names}</td>
+      </tr>`).join("");
+    triedList.innerHTML = `
+      <table class="window-table" style="width:100%">
+        <thead><tr><th>Fingerprint (Symbol|TF|Kategorie|Indikatoren)</th><th>Anzahl</th><th>Verdikte</th><th>Strategien</th></tr></thead>
+        <tbody>${rows}</tbody>
+      </table>
+    `;
+  } else if(triedList){
+    triedList.innerHTML = `<div class="empty-state">Noch keine Einträge im Fingerprint-Register.</div>`;
+  }
+
   // ---------------- DRAWER ----------------
   const overlay = document.getElementById("drawer-overlay");
   const drawer = document.getElementById("drawer");
