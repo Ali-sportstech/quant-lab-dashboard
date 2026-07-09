@@ -13,7 +13,14 @@
   // ---------------- BOT ARMY ----------------
   const botGrid = document.getElementById("bot-grid");
   document.getElementById("bot-count-hint").textContent = D.bots.length + " tracked";
+
+  function fmtNum(n){ if(n===null||n===undefined) return "—"; const s = n>=0?"+":""; return s+n.toFixed(2); }
+  function fmtPct(n){ if(n===null||n===undefined) return "—"; const s = n>=0?"+":""; return s+n.toFixed(2)+"%"; }
+
   D.bots.forEach(b => {
+    const wrap = document.createElement("div");
+    wrap.className = "bot-wrap";
+
     const el = document.createElement("div");
     el.className = "bot-card";
     el.innerHTML = `
@@ -23,6 +30,7 @@
         <div class="bot-meta">${b.symbol} · ${b.tf} · ${b.sizing}</div>
       </div>
       <div class="bot-metrics">
+        <div>P&amp;L (365d) <b class="${(b.windows && b.windows[3] && b.windows[3].netPct>=0)?'pos-txt':'neg-txt'}">${b.windows ? fmtPct(b.windows[3].netPct) : "—"}</b></div>
         <div>Sharpe <b>${fmtNum(b.sharpe)}</b></div>
         <div>DD <b>${b.dd}%</b></div>
         <div>PF <b>${b.pf}</b></div>
@@ -32,13 +40,55 @@
         <div class="confidence-bar"><div class="confidence-fill" style="width:${b.confidence}%"></div></div>
         <div class="conf-label">${b.confidence}% conf.</div>
       </div>
+      <div class="bot-expand-arrow">▾</div>
     `;
     el.style.cursor = "pointer";
-    el.addEventListener("click", () => openDrawer(b.name));
-    botGrid.appendChild(el);
-  });
 
-  function fmtNum(n){ if(n===null||n===undefined) return "—"; const s = n>=0?"+":""; return s+n.toFixed(2); }
+    const expandPanel = document.createElement("div");
+    expandPanel.className = "bot-windows";
+    expandPanel.style.display = "none";
+    if(b.windows){
+      const rows = b.windows.map(w => {
+        if(w.noSignal){
+          return `<tr><td>${w.label}</td><td colspan="5" class="empty-state">No trades — no signal fired</td></tr>`;
+        }
+        const pctClass = w.netPct >= 0 ? "pos-txt" : "neg-txt";
+        return `<tr>
+          <td>${w.label}</td>
+          <td class="${pctClass}">${fmtPct(w.netPct)}</td>
+          <td>${w.sharpe===null ? "—" : w.sharpe.toFixed(2)}${w.lowSample ? ' <span class="lowsample">(thin)</span>' : ''}</td>
+          <td>${w.pf===null ? "—" : w.pf.toFixed(2)}</td>
+          <td>${w.dd.toFixed(2)}%</td>
+          <td>${w.trades}</td>
+        </tr>`;
+      }).join("");
+      expandPanel.innerHTML = `
+        <table class="window-table">
+          <thead><tr><th>Window</th><th>Net P&amp;L</th><th>Sharpe</th><th>PF</th><th>Max DD</th><th>Trades</th></tr></thead>
+          <tbody>${rows}</tbody>
+        </table>
+        <div class="bot-detail-link">Click card to open full detail drawer →</div>
+      `;
+    } else {
+      expandPanel.innerHTML = `<div class="empty-state">No multi-window backtest data yet.</div>`;
+    }
+
+    el.addEventListener("click", (e) => {
+      // toggle expand on arrow/card body click, open drawer on name click area handled separately
+      const isExpanded = expandPanel.style.display !== "none";
+      expandPanel.style.display = isExpanded ? "none" : "block";
+      el.querySelector(".bot-expand-arrow").textContent = isExpanded ? "▾" : "▴";
+    });
+    expandPanel.addEventListener("click", (e) => {
+      if(e.target.closest(".bot-detail-link") || e.target.tagName === "TABLE" || e.target.tagName === "TD" || e.target.tagName==="TR" || e.target.tagName==="TBODY"){
+        openDrawer(b.name);
+      }
+    });
+
+    wrap.appendChild(el);
+    wrap.appendChild(expandPanel);
+    botGrid.appendChild(wrap);
+  });
 
   // ---------------- VALIDATION QUEUE ----------------
   const vqList = document.getElementById("vq-list");
@@ -111,6 +161,7 @@
 
   function openDrawer(name){
     const meta = D.strategyMeta[name];
+    const bot = D.bots.find(b => b.name === name);
     document.getElementById("drawer-title").textContent = name;
     if(!meta){
       document.getElementById("drawer-sym").textContent = "No detailed metrics captured yet";
@@ -125,14 +176,41 @@
     }
     document.getElementById("drawer-sym").textContent = `${meta.symbol} · ${meta.tf} · ${meta.status}`;
     const posNeg = v => v >= 0 ? "pos" : "neg";
-    document.getElementById("drawer-metrics").innerHTML = `
-      <div class="metric-box"><div class="v ${posNeg(meta.sharpe)}">${fmtNum(meta.sharpe)}</div><div class="l">Sharpe</div></div>
-      <div class="metric-box"><div class="v">${meta.dd}%</div><div class="l">Max DD</div></div>
-      <div class="metric-box"><div class="v">${meta.pf}</div><div class="l">Profit Factor</div></div>
-      <div class="metric-box"><div class="v">${meta.winrate}%</div><div class="l">Win Rate</div></div>
-      <div class="metric-box"><div class="v">${meta.trades}</div><div class="l">Trades</div></div>
-      <div class="metric-box"><div class="v" style="color:var(--gold)">${meta.status}</div><div class="l">Status</div></div>
-    `;
+
+    // If we have per-window data (bots array), show a proper 30/90/120/365d table instead of flat metrics
+    if(bot && bot.windows){
+      const rows = bot.windows.map(w => {
+        if(w.noSignal){
+          return `<tr><td>${w.label}</td><td colspan="5" class="empty-state">No signal</td></tr>`;
+        }
+        const pctClass = w.netPct >= 0 ? "pos" : "neg";
+        return `<tr>
+          <td>${w.label}</td>
+          <td class="${pctClass}">${fmtPct(w.netPct)}</td>
+          <td>${w.sharpe===null ? "—" : w.sharpe.toFixed(2)}</td>
+          <td>${w.pf===null ? "—" : w.pf.toFixed(2)}</td>
+          <td>${w.dd.toFixed(2)}%</td>
+          <td>${w.trades}</td>
+        </tr>`;
+      }).join("");
+      document.getElementById("drawer-metrics").innerHTML = `
+        <table class="window-table" style="grid-column:1/-1">
+          <thead><tr><th>Window</th><th>Net P&amp;L</th><th>Sharpe</th><th>PF</th><th>Max DD</th><th>Trades</th></tr></thead>
+          <tbody>${rows}</tbody>
+        </table>
+      `;
+      document.getElementById("drawer-metrics").style.display = "block";
+    } else {
+      document.getElementById("drawer-metrics").style.display = "grid";
+      document.getElementById("drawer-metrics").innerHTML = `
+        <div class="metric-box"><div class="v ${posNeg(meta.sharpe)}">${fmtNum(meta.sharpe)}</div><div class="l">Sharpe</div></div>
+        <div class="metric-box"><div class="v">${meta.dd}%</div><div class="l">Max DD</div></div>
+        <div class="metric-box"><div class="v">${meta.pf}</div><div class="l">Profit Factor</div></div>
+        <div class="metric-box"><div class="v">${meta.winrate}%</div><div class="l">Win Rate</div></div>
+        <div class="metric-box"><div class="v">${meta.trades}</div><div class="l">Trades</div></div>
+        <div class="metric-box"><div class="v" style="color:var(--gold)">${meta.status}</div><div class="l">Status</div></div>
+      `;
+    }
     const warnSection = document.getElementById("drawer-warn-section");
     if(meta.warnings && meta.warnings.length){
       warnSection.style.display = "";
