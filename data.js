@@ -1,13 +1,13 @@
 // StrategyFactory Quant Lab — data snapshot
 // Generated from live trader.dev pulls (list_strategies, get_strategy, backtest results)
 const QL_DATA = {
-  generatedAt: "2026-07-07T00:00:00Z",
+  generatedAt: "2026-07-09T10:00:00Z",
   portfolio: {
     liveBots: 3,
     paperBots: 1,
     candidatesThisWeek: 8,
     rejectedThisWeek: 6,
-    creditsRemaining: 74665,
+    creditsRemaining: 74367,
   },
   bots: [
     { id: "zec-ut-p5", name: "ZEC UT P5", symbol: "ZECUSDT", tf: "15m", status: "active", tier: "live",
@@ -21,13 +21,14 @@ const QL_DATA = {
     { id: "liquidity-swing-v5", name: "Liquidity Swing v5", symbol: "ETHUSDT", tf: "1h", status: "active", tier: "live",
       sharpe: 2.56, dd: 13.8, pf: 2.3, winrate: 52, trades: 75, confidence: 85,
       sizing: "$1,000 capital, 1x", indicators: ["Swing High/Low", "ATR", "Risk:Reward Bracket"],
-      notes: "Highest Sharpe in portfolio. rr=4.5 sweep found no edge over rr=2.8 — parameters already optimal." },
+      notes: "Highest Sharpe in portfolio. rr=4.5 sweep found no edge over rr=2.8 — parameters already optimal. UPDATE 2026-07-09: live alert pine source swapped to a v2 variant adding a high-volatility position-size reducer (percentrank-based vol regime filter, 0.5x size above 90th pct realized vol). Same rr/stopAtrMul core logic. No backtest has been run yet on this session against the v2 source — sharpe/dd/pf/winrate/trades above still reflect the prior version and need re-validation." },
     { id: "hype-ibs-meanrev", name: "HYPE IBS MeanRev", symbol: "HYPEUSDT", tf: "4h", status: "paused", tier: "paper",
       sharpe: -0.02, dd: 24.2, pf: 1.04, winrate: 58, trades: 83, confidence: 18,
       sizing: "n/a — paused", indicators: ["IBS (Internal Bar Strength)", "SMA200", "ATR Stop"],
       notes: "Re-verified this week: 90d window looked strong (+30%) but OOS window (Sep25-Apr26) collapsed to -6.3% net, Sharpe -0.02. Overfitting confirmed. Stays paused." },
   ],
   validationQueue: [
+    { name: "Liquidity Swing v5 Optimized v2 (Vol-Overlay Sizing)", symbol: "ETHUSDT", tf: "1h", stage: "retest", note: "Deployed live 2026-07-09 replacing the prior Liquidity Swing v5 live alert source. Adds a realized-vol percentile size reducer. No backtest run yet against this exact source — needs full validation before its metrics can be trusted or reported separately." },
     { name: "SEI BB Breakout ADX v3", symbol: "SEIUSDT", tf: "1h", stage: "untested", note: "Never backtested this session — queued for first pass." },
     { name: "SEI Vol-Squeeze Breakout ADX v2", symbol: "SEIUSDT", tf: "1h", stage: "untested", note: "Squeeze+ADX breakout variant, no backtest run yet." },
     { name: "SUI Vol-Squeeze Breakout ADX v2", symbol: "SUIUSDT", tf: "2h", stage: "untested", note: "Same family ported to SUI, no backtest run yet." },
