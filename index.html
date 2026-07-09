@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>StrategyFactory · Quant Lab</title>
+<style>
+  :root{
+    --bg-0:#0a0a0d; --bg-1:#111116; --bg-2:#17171e; --bg-3:#1d1d26;
+    --border:#2a2a35; --border-soft:#232330;
+    --gold:#d4af37; --gold-soft:#8f7a3a; --gold-dim:#4a4128;
+    --text-0:#eae7dd; --text-1:#a9a6a0; --text-2:#726f6a;
+    --green:#4caf82; --red:#c85450; --amber:#d4a53a; --blue:#5b8ab8;
+    --live:#4caf82; --paper:#5b8ab8; --dead:#4a4a52;
+    --radius:10px;
+    --shadow: 0 8px 24px rgba(0,0,0,0.45);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;background:var(--bg-0);color:var(--text-0);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,sans-serif;
+    font-size:14px;line-height:1.45;}
+  a{color:inherit;}
+  ::-webkit-scrollbar{width:8px;height:8px;}
+  ::-webkit-scrollbar-thumb{background:var(--border);border-radius:8px;}
+  ::-webkit-scrollbar-track{background:transparent;}
+
+  .topbar{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:14px 24px;border-bottom:1px solid var(--border);
+    background:linear-gradient(180deg,var(--bg-1),var(--bg-0));
+    position:sticky;top:0;z-index:50;
+  }
+  .brand{display:flex;align-items:center;gap:10px;}
+  .brand .mark{
+    width:26px;height:26px;border-radius:6px;
+    background:conic-gradient(from 180deg, var(--gold), var(--gold-dim), var(--gold));
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 0 12px rgba(212,175,55,0.25);
+  }
+  .brand .mark::after{content:"Q";font-weight:700;font-size:13px;color:#0a0a0d;}
+  .brand h1{font-size:15px;font-weight:600;margin:0;letter-spacing:0.02em;}
+  .brand .sub{color:var(--text-2);font-size:11.5px;font-weight:400;}
+  .topstats{display:flex;gap:22px;font-size:12px;color:var(--text-1);}
+  .topstats b{color:var(--gold);font-weight:600;}
+  .topstats .stat{display:flex;flex-direction:column;gap:2px;align-items:flex-end;}
+  .topstats .stat span:first-child{font-size:10px;text-transform:uppercase;letter-spacing:0.06em;color:var(--text-2);}
+
+  .layout{display:grid;grid-template-columns:1.35fr 1fr;gap:16px;padding:18px 24px 40px;max-width:1720px;margin:0 auto;align-items:start;}
+  @media (max-width:1200px){.layout{grid-template-columns:1fr;}}
+
+  .panel{
+    background:var(--bg-1);border:1px solid var(--border);border-radius:var(--radius);
+    box-shadow:var(--shadow); overflow:hidden; display:flex; flex-direction:column;
+  }
+  .panel-head{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:13px 16px;border-bottom:1px solid var(--border-soft);
+  }
+  .panel-head h2{font-size:13px;margin:0;font-weight:600;letter-spacing:0.02em;
+    display:flex;align-items:center;gap:8px;color:var(--text-0);}
+  .panel-head h2 .dot{width:6px;height:6px;border-radius:50%;background:var(--gold);}
+  .panel-head .hint{font-size:11px;color:var(--text-2);}
+  .panel-body{padding:14px 16px;}
+
+  /* ---------- GRAPH ---------- */
+  #graph-panel{grid-row:1 / span 2;display:flex;flex-direction:column;align-self:stretch;}
+  .graph-controls{display:flex;gap:8px;align-items:center;}
+  .toggle{
+    font-size:11px;padding:4px 9px;border-radius:6px;border:1px solid var(--border);
+    background:var(--bg-2);color:var(--text-1);cursor:pointer;user-select:none;
+    transition:all .15s;
+  }
+  .toggle:hover{border-color:var(--gold-soft);color:var(--text-0);}
+  .toggle.active{background:var(--gold-dim);border-color:var(--gold-soft);color:var(--gold);}
+  #graph-wrap{position:relative;flex:1;min-height:560px;background:
+      radial-gradient(ellipse at 30% 20%, rgba(212,175,55,0.04), transparent 60%),
+      var(--bg-0);}
+  #graph-canvas{width:100%;height:100%;display:block;cursor:grab;}
+  #graph-canvas.dragging{cursor:grabbing;}
+  #graph-tooltip{
+    position:absolute;pointer-events:none;background:var(--bg-3);border:1px solid var(--gold-soft);
+    border-radius:8px;padding:10px 12px;font-size:12px;max-width:280px;box-shadow:var(--shadow);
+    opacity:0;transition:opacity .12s;z-index:10;
+  }
+  #graph-legend{
+    position:absolute;bottom:12px;left:12px;font-size:10.5px;color:var(--text-2);
+    display:flex;gap:14px;background:rgba(10,10,13,0.7);padding:6px 10px;border-radius:6px;
+    border:1px solid var(--border-soft);
+  }
+  #graph-legend span{display:flex;align-items:center;gap:5px;}
+  #graph-legend i{width:8px;height:8px;border-radius:50%;display:inline-block;}
+
+  /* ---------- BOT ARMY ---------- */
+  .bot-grid{display:flex;flex-direction:column;gap:8px;}
+  .bot-card{
+    display:grid;grid-template-columns:auto 1fr auto auto;gap:12px;align-items:center;
+    padding:10px 12px;background:var(--bg-2);border:1px solid var(--border-soft);border-radius:8px;
+  }
+  .bot-status-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0;}
+  .bot-status-dot.active{background:var(--live);box-shadow:0 0 8px rgba(76,175,130,0.6);}
+  .bot-status-dot.paused{background:var(--paper);}
+  .bot-name{font-weight:600;font-size:12.5px;}
+  .bot-meta{font-size:11px;color:var(--text-2);}
+  .bot-metrics{display:flex;gap:14px;font-size:11.5px;color:var(--text-1);}
+  .bot-metrics b{color:var(--text-0);}
+  .confidence-bar{width:64px;height:5px;background:var(--bg-3);border-radius:3px;overflow:hidden;}
+  .confidence-fill{height:100%;background:linear-gradient(90deg,var(--gold-dim),var(--gold));}
+  .conf-label{font-size:10px;color:var(--text-2);margin-top:3px;text-align:right;}
+
+  /* ---------- VALIDATION QUEUE ---------- */
+  .vq-row{
+    display:grid;grid-template-columns:110px 1fr auto;gap:10px;align-items:center;
+    padding:9px 12px;border-bottom:1px solid var(--border-soft);font-size:12px;
+  }
+  .vq-row:last-child{border-bottom:none;}
+  .vq-name{font-weight:600;color:var(--text-0);}
+  .vq-sub{font-size:10.5px;color:var(--text-2);}
+  .badge{font-size:10px;padding:3px 8px;border-radius:20px;font-weight:600;text-transform:uppercase;letter-spacing:0.03em;white-space:nowrap;}
+  .badge.untested{background:rgba(91,138,184,0.15);color:var(--blue);border:1px solid rgba(91,138,184,0.3);}
+  .badge.retest{background:rgba(212,165,58,0.15);color:var(--amber);border:1px solid rgba(212,165,58,0.3);}
+  .badge.pass{background:rgba(76,175,130,0.15);color:var(--green);border:1px solid rgba(76,175,130,0.3);}
+  .badge.reject{background:rgba(200,84,80,0.15);color:var(--red);border:1px solid rgba(200,84,80,0.3);}
+  .badge.review{background:rgba(212,175,55,0.15);color:var(--gold);border:1px solid rgba(212,175,55,0.3);}
+
+  /* ---------- EDGE DECAY ---------- */
+  .decay-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;}
+  @media (max-width:700px){.decay-grid{grid-template-columns:repeat(2,1fr);}}
+  .decay-col{background:var(--bg-2);border:1px solid var(--border-soft);border-radius:8px;padding:10px;min-height:120px;}
+  .decay-col h3{font-size:11px;text-transform:uppercase;letter-spacing:0.05em;margin:0 0 8px;
+    display:flex;align-items:center;gap:6px;}
+  .decay-col h3 i{width:7px;height:7px;border-radius:50%;}
+  .decay-col.alive h3 i{background:var(--green);} .decay-col.alive h3{color:var(--green);}
+  .decay-col.soft h3 i{background:var(--amber);} .decay-col.soft h3{color:var(--amber);}
+  .decay-col.decaying h3 i{background:#d47a3a;} .decay-col.decaying h3{color:#d47a3a;}
+  .decay-col.dead h3 i{background:var(--red);} .decay-col.dead h3{color:var(--red);}
+  .decay-item{font-size:11.5px;padding:6px 0;border-top:1px solid var(--border-soft);}
+  .decay-item:first-of-type{border-top:none;}
+  .decay-item b{display:block;color:var(--text-0);font-size:12px;}
+  .decay-item span{color:var(--text-2);font-size:10.5px;}
+  .decay-empty{color:var(--text-2);font-size:11px;font-style:italic;}
+
+  /* ---------- APPROVAL QUEUE ---------- */
+  .aq-row{display:flex;align-items:center;gap:12px;padding:10px 12px;background:var(--bg-2);
+    border:1px solid var(--border-soft);border-radius:8px;margin-bottom:8px;}
+  .aq-row:last-child{margin-bottom:0;}
+  .aq-action{font-weight:600;font-size:12px;min-width:70px;color:var(--gold);}
+  .aq-target{flex:1;font-size:12px;color:var(--text-1);}
+  .aq-note{font-size:11px;color:var(--text-2);}
+  .aq-btn{font-size:11px;padding:5px 12px;border-radius:6px;border:1px solid var(--gold-soft);
+    background:var(--gold-dim);color:var(--gold);cursor:pointer;white-space:nowrap;}
+  .aq-btn:hover{background:var(--gold-soft);color:#0a0a0d;}
+  .aq-btn.disabled{opacity:0.35;cursor:not-allowed;}
+
+  /* ---------- DRAWER ---------- */
+  #drawer-overlay{
+    position:fixed;inset:0;background:rgba(0,0,0,0.55);opacity:0;pointer-events:none;
+    transition:opacity .2s;z-index:100;
+  }
+  #drawer-overlay.open{opacity:1;pointer-events:all;}
+  #drawer{
+    position:fixed;top:0;right:0;height:100%;width:420px;max-width:92vw;
+    background:var(--bg-1);border-left:1px solid var(--gold-soft);
+    box-shadow:-16px 0 40px rgba(0,0,0,0.5);
+    transform:translateX(100%);transition:transform .25s cubic-bezier(.4,0,.2,1);
+    z-index:101;overflow-y:auto;
+  }
+  #drawer.open{transform:translateX(0);}
+  .drawer-head{padding:18px 20px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:flex-start;}
+  .drawer-head h2{margin:0 0 4px;font-size:16px;}
+  .drawer-head .sym{font-size:11.5px;color:var(--text-2);}
+  .drawer-close{background:none;border:1px solid var(--border);color:var(--text-1);border-radius:6px;
+    width:26px;height:26px;cursor:pointer;font-size:14px;line-height:1;}
+  .drawer-body{padding:18px 20px;}
+  .drawer-section{margin-bottom:20px;}
+  .drawer-section h3{font-size:11px;text-transform:uppercase;letter-spacing:0.05em;color:var(--gold);margin:0 0 8px;}
+  .metric-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
+  .metric-box{background:var(--bg-2);border:1px solid var(--border-soft);border-radius:7px;padding:8px 10px;}
+  .metric-box .v{font-size:15px;font-weight:700;}
+  .metric-box .l{font-size:9.5px;color:var(--text-2);text-transform:uppercase;letter-spacing:0.04em;}
+  .metric-box .v.pos{color:var(--green);} .metric-box .v.neg{color:var(--red);}
+  .drawer-source{
+    background:#08080a;border:1px solid var(--border-soft);border-radius:7px;padding:10px 12px;
+    font-size:12px;color:var(--text-1);font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+    line-height:1.5;
+  }
+  .warn-item{display:flex;gap:8px;font-size:11.5px;color:var(--red);padding:6px 0;
+    border-bottom:1px solid var(--border-soft);}
+  .warn-item:last-child{border-bottom:none;}
+  .warn-item::before{content:"⚠";flex-shrink:0;}
+  .bt-item{font-size:11.5px;color:var(--text-1);padding:4px 0;}
+  .chip{display:inline-block;font-size:10.5px;padding:3px 8px;border:1px solid var(--border);border-radius:14px;
+    color:var(--text-1);margin:0 4px 4px 0;background:var(--bg-2);}
+
+  .empty-state{color:var(--text-2);font-size:12px;font-style:italic;padding:8px 0;}
+  .footer-note{max-width:1720px;margin:0 auto;padding:0 24px 24px;color:var(--text-2);font-size:11px;}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand">
+    <div class="mark"></div>
+    <div>
+      <h1>StrategyFactory <span class="sub">— Quant Lab</span></h1>
+    </div>
+  </div>
+  <div class="topstats">
+    <div class="stat"><span>Live Bots</span><b id="stat-live">—</b></div>
+    <div class="stat"><span>Paper</span><b id="stat-paper">—</b></div>
+    <div class="stat"><span>Candidates (7d)</span><b id="stat-cand">—</b></div>
+    <div class="stat"><span>Rejected (7d)</span><b id="stat-rej">—</b></div>
+    <div class="stat"><span>Credits</span><b id="stat-credits">—</b></div>
+  </div>
+</div>
+
+<div class="layout">
+
+  <!-- GRAPH -->
+  <div class="panel" id="graph-panel">
+    <div class="panel-head">
+      <h2><span class="dot"></span>Strategy Graph</h2>
+      <div class="graph-controls">
+        <div class="toggle active" data-filter="all">All</div>
+        <div class="toggle" data-filter="live">Live</div>
+        <div class="toggle" data-filter="candidate">Candidates</div>
+        <div class="toggle" data-filter="rejected">Rejected</div>
+      </div>
+    </div>
+    <div id="graph-wrap">
+      <canvas id="graph-canvas"></canvas>
+      <div id="graph-tooltip"></div>
+      <div id="graph-legend">
+        <span><i style="background:var(--live)"></i>Live</span>
+        <span><i style="background:var(--blue)"></i>Candidate</span>
+        <span><i style="background:var(--red)"></i>Rejected</span>
+        <span><i style="background:var(--gold)"></i>Indicator</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- BOT ARMY -->
+  <div class="panel">
+    <div class="panel-head">
+      <h2><span class="dot"></span>Bot Army</h2>
+      <span class="hint" id="bot-count-hint"></span>
+    </div>
+    <div class="panel-body">
+      <div class="bot-grid" id="bot-grid"></div>
+    </div>
+  </div>
+
+  <!-- VALIDATION QUEUE -->
+  <div class="panel">
+    <div class="panel-head">
+      <h2><span class="dot"></span>Validation Queue</h2>
+      <span class="hint">untested → retest → pass / reject → portfolio review</span>
+    </div>
+    <div class="panel-body" style="padding:0 16px 8px;">
+      <div id="vq-list"></div>
+    </div>
+  </div>
+
+  <!-- EDGE DECAY -->
+  <div class="panel">
+    <div class="panel-head">
+      <h2><span class="dot"></span>Edge Decay Board</h2>
+      <span class="hint">weekly audit vs. backtest baseline</span>
+    </div>
+    <div class="panel-body">
+      <div class="decay-grid" id="decay-grid"></div>
+    </div>
+  </div>
+
+  <!-- APPROVAL QUEUE -->
+  <div class="panel">
+    <div class="panel-head">
+      <h2><span class="dot"></span>Approval Queue</h2>
+      <span class="hint">human sign-off required</span>
+    </div>
+    <div class="panel-body">
+      <div id="aq-list"></div>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer-note">Snapshot generated from live trader.dev pulls this session · quant-desk-roles operating cadence · Trading Brain Vault</div>
+
+<!-- DRAWER -->
+<div id="drawer-overlay"></div>
+<div id="drawer">
+  <div class="drawer-head">
+    <div>
+      <h2 id="drawer-title">—</h2>
+      <div class="sym" id="drawer-sym">—</div>
+    </div>
+    <button class="drawer-close" id="drawer-close">✕</button>
+  </div>
+  <div class="drawer-body">
+    <div class="drawer-section">
+      <h3>Key Metrics</h3>
+      <div class="metric-grid" id="drawer-metrics"></div>
+    </div>
+    <div class="drawer-section" id="drawer-warn-section">
+      <h3>Warnings</h3>
+      <div id="drawer-warnings"></div>
+    </div>
+    <div class="drawer-section">
+      <h3>Backtest History</h3>
+      <div id="drawer-backtests"></div>
+    </div>
+    <div class="drawer-section">
+      <h3>Source Logic</h3>
+      <div class="drawer-source" id="drawer-source"></div>
+    </div>
+    <div class="drawer-section">
+      <h3>Related Indicators</h3>
+      <div id="drawer-indicators"></div>
+    </div>
+  </div>
+</div>
+
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
