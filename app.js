@@ -60,11 +60,12 @@
           <td>${w.pf===null ? "—" : w.pf.toFixed(2)}</td>
           <td>${w.dd.toFixed(2)}%</td>
           <td>${w.trades}</td>
+          <td>${w.url ? `<a href="${w.url}" target="_blank" rel="noopener" class="td-link" onclick="event.stopPropagation()" title="View this backtest on trader.dev">↗</a>` : '<span class="empty-state">—</span>'}</td>
         </tr>`;
       }).join("");
       expandPanel.innerHTML = `
         <table class="window-table">
-          <thead><tr><th>Window</th><th>Net P&amp;L</th><th>Sharpe</th><th>PF</th><th>Max DD</th><th>Trades</th></tr></thead>
+          <thead><tr><th>Window</th><th>Net P&amp;L</th><th>Sharpe</th><th>PF</th><th>Max DD</th><th>Trades</th><th>Report</th></tr></thead>
           <tbody>${rows}</tbody>
         </table>
         <div class="bot-detail-link">Click card to open full detail drawer →</div>
@@ -185,6 +186,8 @@
     document.getElementById("drawer-title").textContent = name;
     if(!meta){
       document.getElementById("drawer-sym").textContent = "No detailed metrics captured yet";
+      const linkHost0 = document.getElementById("drawer-tdlink");
+      if(linkHost0) linkHost0.innerHTML = (bot && bot.traderDevUrl) ? `<a href="${bot.traderDevUrl}" target="_blank" rel="noopener">View on trader.dev ↗</a>` : "";
       document.getElementById("drawer-metrics").innerHTML = `<div class="empty-state">Not yet backtested this cycle.</div>`;
       document.getElementById("drawer-warnings").innerHTML = "";
       document.getElementById("drawer-warn-section").style.display = "none";
@@ -197,11 +200,18 @@
     document.getElementById("drawer-sym").textContent = `${meta.symbol} · ${meta.tf} · ${meta.status}`;
     const posNeg = v => v >= 0 ? "pos" : "neg";
 
+    // trader.dev report link — prefer the bot's canonical traderDevUrl, fall back to most recent window url
+    const reportUrl = (bot && bot.traderDevUrl) || (bot && bot.windows && [...bot.windows].reverse().find(w => w.url) || {}).url;
+    const linkHost = document.getElementById("drawer-tdlink");
+    if(linkHost){
+      linkHost.innerHTML = reportUrl ? `<a href="${reportUrl}" target="_blank" rel="noopener">View on trader.dev ↗</a>` : "";
+    }
+
     // If we have per-window data (bots array), show a proper 30/90/120/365d table instead of flat metrics
     if(bot && bot.windows){
       const rows = bot.windows.map(w => {
         if(w.noSignal){
-          return `<tr><td>${w.label}</td><td colspan="5" class="empty-state">No signal</td></tr>`;
+          return `<tr><td>${w.label}</td><td colspan="6" class="empty-state">No signal</td></tr>`;
         }
         const pctClass = w.netPct >= 0 ? "pos" : "neg";
         return `<tr>
@@ -211,11 +221,12 @@
           <td>${w.pf===null ? "—" : w.pf.toFixed(2)}</td>
           <td>${w.dd.toFixed(2)}%</td>
           <td>${w.trades}</td>
+          <td>${w.url ? `<a href="${w.url}" target="_blank" rel="noopener" class="td-link" title="View this backtest on trader.dev">↗</a>` : '<span class="empty-state">—</span>'}</td>
         </tr>`;
       }).join("");
       document.getElementById("drawer-metrics").innerHTML = `
         <table class="window-table" style="grid-column:1/-1">
-          <thead><tr><th>Window</th><th>Net P&amp;L</th><th>Sharpe</th><th>PF</th><th>Max DD</th><th>Trades</th></tr></thead>
+          <thead><tr><th>Window</th><th>Net P&amp;L</th><th>Sharpe</th><th>PF</th><th>Max DD</th><th>Trades</th><th>Report</th></tr></thead>
           <tbody>${rows}</tbody>
         </table>
       `;
