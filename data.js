@@ -1,13 +1,13 @@
 // StrategyFactory Quant Lab — data snapshot
 // Generated from live trader.dev pulls (list_strategies, get_strategy, backtest results)
 const QL_DATA = {
-  generatedAt: "2026-07-09T21:15:00Z",
+  generatedAt: "2026-07-10T00:00:00Z",
   portfolio: {
     liveBots: 3,
     paperBots: 1,
     candidatesThisWeek: 8,
     rejectedThisWeek: 6,
-    creditsRemaining: 74348,
+    creditsRemaining: 74334,
   },
   bots: [
     { id: "zec-ut-p5", name: "ZEC UT P5", symbol: "ZECUSDT", tf: "15m", status: "active", tier: "live",
@@ -154,5 +154,6 @@ const QL_DATA = {
     { fingerprint: "ZECUSDT|15|other|none", count: 1, verdicts: "credible", names: "ZEC UT P5 (Out-of-Sample Verify)" },
     { fingerprint: "ZECUSDT|15|trend_following|trailing_stop", count: 1, verdicts: "excluded_optimizer_run", names: "Realized-Vol Risk Overlay -- ZEC UT P5 (rekalibriert, VERWORFEN)" },
     { fingerprint: "ZECUSDT|240|breakout|none", count: 1, verdicts: "profitable_only", names: "Vol Squeeze-Release Breakout ZEC 4h (Bugfix-Vergleich)" },
+    { fingerprint: "WIFUSDT|15|momentum|sma,macd,atr", count: 1, verdicts: "unprofitable", names: "RESEARCH-2026-07-10-WIF-MomentumThrust" },
   ],
 };
