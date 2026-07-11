@@ -1,13 +1,13 @@
 // StrategyFactory Quant Lab — data snapshot
 // Generated from live trader.dev pulls (list_strategies, get_strategy, backtest results)
 const QL_DATA = {
-  generatedAt: "2026-07-10T19:25:58Z",
+  generatedAt: "2026-07-11T06:01:42Z",
   portfolio: {
     liveBots: 3,
     paperBots: 1,
     candidatesThisWeek: 8,
     rejectedThisWeek: 6,
-    creditsRemaining: 74334,
+    creditsRemaining: 74332,
   },
   bots: [
     { id: "zec-ut-p5", name: "ZEC UT P5", symbol: "ZECUSDT", tf: "15m", status: "active", tier: "live",
@@ -144,8 +144,9 @@ const QL_DATA = {
     { fingerprint: "BTCUSDT|60|momentum|ema,rsi", count: 1, verdicts: "unprofitable", names: "BTC Momentum EMA Crossover 20/50 + RSI" },
     { fingerprint: "BTCUSDT|?|breakout|adx,donchian", count: 1, verdicts: "credible", names: "TF-DonchianADX-v8 (Browse-Katalog)" },
     { fingerprint: "BTCUSDT|?|other|none", count: 1, verdicts: "credible", names: "BTC Candle Range Theory (Browse-Katalog)" },
+    { fingerprint: "BNBUSDT|240|mean_reversion|atr,cmf,ema,keltner,rsi,vwma", count: 1, verdicts: "unprofitable", names: "RESEARCH-2026-07-11-BNB-LiquidityReclaim" },
     { fingerprint: "DOGEUSDT|240|mean_reversion|chaikin", count: 1, verdicts: "credible", names: "DOGE Chaikin Z-Score MR v2 (Browse-Katalog)" },
-    { fingerprint: "ETHUSDT|60|other|none", count: 2, verdicts: "credible, excluded_optimizer_run", names: "Realized-Vol Risk Overlay -- Liquidity Swing v5 (90pct/0.5x, LIVE DEPLOYED); Realized-Vol Risk Overlay -- Hilbert F36 (extra dampening, ZURUECKGESTELLT)" },
+    { fingerprint: "ETHUSDT|60|other|none", count: 2, verdicts: "credible, excluded_optimizer_run", names: "Realized-Vol Risk Overlay -- Liquidity Swing v5 (90pct/0.5x, LIVE DEPLOYED), Realized-Vol Risk Overlay -- Hilbert F36 (extra dampening, ZURUECKGESTELLT)" },
     { fingerprint: "HYPEUSDT|15|other|adx,t3", count: 1, verdicts: "credible", names: "HYPE DemonDays PH Cross ADX-DI Filter (Browse-Katalog)" },
     { fingerprint: "HYPEUSDT|15|other|none", count: 1, verdicts: "credible", names: "HYPE UT P5 (Cross-Coin-Test, identischer Code)" },
     { fingerprint: "HYPEUSDT|240|mean_reversion|atr,ibs,sma", count: 1, verdicts: "credible", names: "HYPE IBS MeanRev 4h" },
