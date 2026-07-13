@@ -1,13 +1,13 @@
 // StrategyFactory Quant Lab — data snapshot
 // Generated from live trader.dev pulls (list_strategies, get_strategy, backtest results)
 const QL_DATA = {
-  generatedAt: "2026-07-12T18:00:33Z",
+  generatedAt: "2026-07-13T06:00:58Z",
   portfolio: {
     liveBots: 3,
     paperBots: 1,
     candidatesThisWeek: 8,
     rejectedThisWeek: 6,
-    creditsRemaining: 1477,
+    creditsRemaining: 1466,
   },
   bots: [
     { id: "zec-ut-p5", name: "ZEC UT P5", symbol: "ZECUSDT", tf: "15m", status: "active", tier: "live",
@@ -138,7 +138,12 @@ const QL_DATA = {
   // Source of truth for what's already been tested, to avoid repeating backtest ideas in a loop.
   alreadyTried: [
     { fingerprint: "1000BONKUSDT|15|breakout|atr,ema,keltner,sma", count: 1, verdicts: "unprofitable", names: "RESEARCH-2026-07-09-BONK-SqueezeBreakout" },
+    { fingerprint: "AVAXUSDT|240|mean_reversion|none", count: 1, verdicts: "credible", names: "SMOKE-2026-07-13 Ultimate Oscillator MR AVAX 4h" },
     { fingerprint: "AVAXUSDT|30|trend_following|atr,ema", count: 1, verdicts: "unprofitable", names: "SMOKE-2026-07-12 AVAX VH 30m Daytrade" },
+    { fingerprint: "AVAXUSDT|60|mean_reversion|adx,atr,bollinger,rsi", count: 1, verdicts: "credible", names: "SMOKE-2026-07-13 BB MR ADX AVAX 1h" },
+    { fingerprint: "AVAXUSDT|60|mean_reversion|adx,atr,ema,keltner,rsi", count: 1, verdicts: "credible", names: "SMOKE-2026-07-13 Keltner MR ADX AVAX 1h" },
+    { fingerprint: "AVAXUSDT|60|trend_following|atr,ema,sma", count: 1, verdicts: "unprofitable", names: "SMOKE-2026-07-13 Spectral AVAX F29 1h" },
+    { fingerprint: "AVAXUSDT|60|trend_following|ema,sma", count: 1, verdicts: "unprofitable", names: "SMOKE-2026-07-13 Spectral AVAX F19 F41 1h" },
     { fingerprint: "BNBUSDT|240|mean_reversion|atr,cmf,ema,keltner,rsi,vwma", count: 1, verdicts: "unprofitable", names: "RESEARCH-2026-07-11-BNB-LiquidityReclaim" },
     { fingerprint: "BTCUSDT|240|breakout|atr,donchian", count: 1, verdicts: "excluded_optimizer_run", names: "Vol Squeeze-Release Breakout BTC 4h (Research Desk #2)" },
     { fingerprint: "BTCUSDT|240|trend_following|atr,ema,trailing_stop", count: 1, verdicts: "unprofitable", names: "SMOKE-2026-07-12 EMA200 Trend 4h RiskSized BTC" },
@@ -155,7 +160,11 @@ const QL_DATA = {
     { fingerprint: "HYPEUSDT|15|other|adx,t3", count: 1, verdicts: "credible", names: "HYPE DemonDays PH Cross ADX-DI Filter (Browse-Katalog)" },
     { fingerprint: "HYPEUSDT|15|other|none", count: 1, verdicts: "credible", names: "HYPE UT P5 (Cross-Coin-Test, identischer Code)" },
     { fingerprint: "HYPEUSDT|240|mean_reversion|atr,ibs,sma", count: 1, verdicts: "credible", names: "HYPE IBS MeanRev 4h" },
+    { fingerprint: "HYPEUSDT|60|other|atr,macd,sma", count: 1, verdicts: "credible", names: "SMOKE-2026-07-13 HYPE MACD Histogram Zero Cross 1h" },
     { fingerprint: "ORDIUSDT|5|trend_following|adx,atr,sma,supertrend", count: 1, verdicts: "credible", names: "ORDI 5m Q-Trend v3 (Original p=30 mult=1.2)" },
+    { fingerprint: "SOLUSDT|5|other|none", count: 1, verdicts: "credible", names: "SMOKE-2026-07-13 PanicFade SOL 5m v2" },
+    { fingerprint: "SOLUSDT|60|mean_reversion|adx,atr,bollinger,cmf,sma", count: 1, verdicts: "credible", names: "SMOKE-2026-07-13 CMF MR ADX SOL 1h" },
+    { fingerprint: "SOLUSDT|60|mean_reversion|atr,ema", count: 1, verdicts: "credible", names: "SMOKE-2026-07-13 Elder Ray MR SOL 1h Shorts Only" },
     { fingerprint: "WIFUSDT|15|momentum|atr,macd", count: 1, verdicts: "unprofitable", names: "RESEARCH-2026-07-10-WIF-MomentumThrust" },
     { fingerprint: "ZECUSDT|15|other|ema,rsi,trailing_stop", count: 1, verdicts: "credible", names: "ZEC UT P5 (Original Compounding)" },
     { fingerprint: "ZECUSDT|15|other|none", count: 1, verdicts: "credible", names: "ZEC UT P5 (Out-of-Sample Verify)" },
