@@ -1,13 +1,13 @@
 // StrategyFactory Quant Lab — data snapshot
 // Generated from live trader.dev pulls (list_strategies, get_strategy, backtest results)
 const QL_DATA = {
-  generatedAt: "2026-07-14T06:01:24Z",
+  generatedAt: "2026-07-15T06:08:22Z",
   portfolio: {
     liveBots: 3,
     paperBots: 1,
     candidatesThisWeek: 8,
     rejectedThisWeek: 6,
-    creditsRemaining: 1446,
+    creditsRemaining: 1445,
   },
   bots: [
     { id: "zec-ut-p5", name: "ZEC UT P5", symbol: "ZECUSDT", tf: "15m", status: "active", tier: "live",
@@ -165,6 +165,7 @@ const QL_DATA = {
     { fingerprint: "HYPEUSDT|60|other|atr,macd,sma", count: 1, verdicts: "credible", names: "SMOKE-2026-07-13 HYPE MACD Histogram Zero Cross 1h" },
     { fingerprint: "ORDIUSDT|5|trend_following|adx,atr,sma,supertrend", count: 1, verdicts: "credible", names: "ORDI 5m Q-Trend v3 (Original p=30 mult=1.2)" },
     { fingerprint: "SOLUSDT|240|momentum|atr,sma", count: 1, verdicts: "unprofitable", names: "SMOKE-2026-07-14 SOL ARM 4H TV-window PF2 sweep" },
+    { fingerprint: "SOLUSDT|240|trend_following|atr,ema,sma,trailing_stop", count: 1, verdicts: "profitable_only", names: "SMOKE-2026-07-15 SOL 4h OBV ForceIndex" },
     { fingerprint: "SOLUSDT|5|other|none", count: 1, verdicts: "credible", names: "SMOKE-2026-07-13 PanicFade SOL 5m v2" },
     { fingerprint: "SOLUSDT|60|mean_reversion|adx,atr,bollinger,chaikin,cmf,sma", count: 1, verdicts: "unprofitable", names: "DEEP-2026-07-13 CMF MR ADX SOL 1h Current 365d" },
     { fingerprint: "SOLUSDT|60|mean_reversion|adx,atr,bollinger,cmf,sma", count: 1, verdicts: "credible", names: "SMOKE-2026-07-13 CMF MR ADX SOL 1h" },
