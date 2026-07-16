@@ -1,13 +1,13 @@
 // StrategyFactory Quant Lab — data snapshot
 // Generated from live trader.dev pulls (list_strategies, get_strategy, backtest results)
 const QL_DATA = {
-  generatedAt: "2026-07-16T06:02:24Z",
+  generatedAt: "2026-07-16T18:02:26Z",
   portfolio: {
     liveBots: 3,
     paperBots: 1,
     candidatesThisWeek: 8,
     rejectedThisWeek: 6,
-    creditsRemaining: 1441,
+    creditsRemaining: 1427,
   },
   bots: [
     { id: "zec-ut-p5", name: "ZEC UT P5", symbol: "ZECUSDT", tf: "15m", status: "active", tier: "live",
