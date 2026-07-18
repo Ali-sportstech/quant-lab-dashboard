@@ -1,13 +1,13 @@
 // StrategyFactory Quant Lab — data snapshot
 // Generated from live trader.dev pulls (list_strategies, get_strategy, backtest results)
 const QL_DATA = {
-  generatedAt: "2026-07-18T06:01:11Z",
+  generatedAt: "2026-07-18T18:01:26Z",
   portfolio: {
     liveBots: 3,
     paperBots: 1,
     candidatesThisWeek: 8,
     rejectedThisWeek: 6,
-    creditsRemaining: 1419,
+    creditsRemaining: 1500,
   },
   bots: [
     { id: "zec-ut-p5", name: "ZEC UT P5", symbol: "ZECUSDT", tf: "15m", status: "active", tier: "live",
@@ -176,6 +176,6 @@ const QL_DATA = {
     { fingerprint: "ZECUSDT|15|other|ema,rsi,trailing_stop", count: 1, verdicts: "credible", names: "ZEC UT P5 (Original Compounding)" },
     { fingerprint: "ZECUSDT|15|other|none", count: 1, verdicts: "credible", names: "ZEC UT P5 (Out-of-Sample Verify)" },
     { fingerprint: "ZECUSDT|15|trend_following|trailing_stop", count: 1, verdicts: "excluded_optimizer_run", names: "Realized-Vol Risk Overlay -- ZEC UT P5 (rekalibriert, VERWORFEN)" },
-    { fingerprint: "ZECUSDT|240|breakout|none", count: 1, verdicts: "profitable_only", names: "Vol Squeeze-Release Breakout ZEC 4h (Bugfix-Vergleich)" },
+    { fingerprint: "ZECUSDT|240|breakout|none", count: 1, verdicts: "profitable_only", names: "Vol Squeeze-Release Breakout ZEC 4h (Bugfix-Vergleich)" }
   ],
 };
