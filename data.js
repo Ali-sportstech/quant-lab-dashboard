@@ -1,7 +1,7 @@
 // StrategyFactory Quant Lab — data snapshot
 // Generated from live trader.dev pulls (list_strategies, get_strategy, backtest results)
 const QL_DATA = {
-  generatedAt: "2026-07-20T06:00:26Z",
+  generatedAt: "2026-07-20T18:01:03Z",
   portfolio: {
     liveBots: 3,
     paperBots: 1,
