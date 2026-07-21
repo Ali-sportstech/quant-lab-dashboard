@@ -1,13 +1,13 @@
 // StrategyFactory Quant Lab — data snapshot
 // Generated from live trader.dev pulls (list_strategies, get_strategy, backtest results)
 const QL_DATA = {
-  generatedAt: "2026-07-20T18:01:03Z",
+  generatedAt: "2026-07-21T06:01:02Z",
   portfolio: {
     liveBots: 3,
     paperBots: 1,
     candidatesThisWeek: 8,
     rejectedThisWeek: 6,
-    creditsRemaining: 1388,
+    creditsRemaining: 1382,
   },
   bots: [
     { id: "zec-ut-p5", name: "ZEC UT P5", symbol: "ZECUSDT", tf: "15m", status: "active", tier: "live",
@@ -151,6 +151,7 @@ const QL_DATA = {
     {"fingerprint":"BTCUSDT|240|trend_following|atr,ema,trailing_stop","count":2,"verdicts":"unprofitable","names":"SMOKE-2026-07-12 EMA200 Trend 4h RiskSized BTC, SMOKE-2026-07-16 BTC 4h EMA200 Trend RiskSized"},
     {"fingerprint":"BTCUSDT|60|breakout|bollinger,sma","count":2,"verdicts":"profitable_only","names":"SMOKE-2026-07-12 BB Squeeze Breakout BTC 1h, DEEP-2026-07-12 BB Squeeze Breakout BTC 1h"},
     {"fingerprint":"BTCUSDT|60|mean_reversion|bollinger,rsi","count":1,"verdicts":"profitable_only","names":"BTC Mean-Reversion Bollinger+RSI (Original)"},
+    {"fingerprint":"BTCUSDT|60|mean_reversion|atr,rsi","count":1,"verdicts":"credible, edge_decaying","names":"RESEARCH-2026-07-20-BTC-RSI2-MeanReversion"},
     {"fingerprint":"BTCUSDT|60|mean_reversion|none","count":1,"verdicts":"excluded_optimizer_run","names":"BTC Mean-Reversion Bollinger+RSI (Optimiert, 13 Trades)"},
     {"fingerprint":"BTCUSDT|60|momentum|ema,rsi","count":1,"verdicts":"unprofitable","names":"BTC Momentum EMA Crossover 20/50 + RSI"},
     {"fingerprint":"BTCUSDT|60|trend_following|adx,atr,ema,rsi,trailing_stop","count":2,"verdicts":"credible, profitable_only","names":"SMOKE-2026-07-12 BTC V7 RSI DI Chandelier, DEEP-2026-07-12 BTC V7 RSI DI Chandelier"},
