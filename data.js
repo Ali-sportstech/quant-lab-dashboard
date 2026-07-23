@@ -1,13 +1,13 @@
 // StrategyFactory Quant Lab — data snapshot
 // Generated from live trader.dev pulls (list_strategies, get_strategy, backtest results)
 const QL_DATA = {
-  generatedAt: "2026-07-23T06:00:51Z",
+  generatedAt: "2026-07-23T18:01:48Z",
   portfolio: {
     liveBots: 3,
     paperBots: 1,
     candidatesThisWeek: 8,
     rejectedThisWeek: 6,
-    creditsRemaining: 1292,
+    creditsRemaining: 1277,
   },
   bots: [
     { id: "zec-ut-p5", name: "ZEC UT P5", symbol: "ZECUSDT", tf: "15m", status: "active", tier: "live",
@@ -166,7 +166,7 @@ const QL_DATA = {
     {"fingerprint":"ETHUSDT|60|other|none","count":2,"verdicts":"credible, excluded_optimizer_run","names":"Realized-Vol Risk Overlay -- Liquidity Swing v5 (90pct/0.5x, LIVE DEPLOYED), Realized-Vol Risk Overlay -- Hilbert F36 (extra dampening, ZURUECKGESTELLT)"},
     {"fingerprint":"HYPEUSDT|15|other|adx,t3","count":1,"verdicts":"credible","names":"HYPE DemonDays PH Cross ADX-DI Filter (Browse-Katalog)"},
     {"fingerprint":"HYPEUSDT|15|other|none","count":1,"verdicts":"credible","names":"HYPE UT P5 (Cross-Coin-Test, identischer Code)"},
-    {"fingerprint":"HYPEUSDT|240|mean_reversion|atr,ibs,sma","count":12,"verdicts":"credible, excluded_optimizer_run, unprofitable","names":"HYPE IBS MeanRev 4h, SMOKE-2026-07-22 HYPE IBS MeanRev 4h, COURT-2026-07-22 HYPE IBS 4h 30d, COURT-2026-07-22 HYPE IBS 4h 90d, COURT-2026-07-22 HYPE IBS 4h 120d, COURT-2026-07-22 HYPE IBS 4h current 365d, COURT-2026-07-22 HYPE IBS 4h OOS 365d truncated, COURT-2026-07-22 HYPE IBS 4h 120d slippage staircase, OPT-2026-07-22 HYPE IBS 4h 120d grid best, OPT-2026-07-22 HYPE IBS 4h current365 retest, OPT-2026-07-22 HYPE IBS 4h OOS-clamped retest, SMOKE-2026-07-23 HYPE IBS MeanRev 4h"},
+    {"fingerprint":"HYPEUSDT|240|mean_reversion|atr,ibs,sma","count":14,"verdicts":"credible, excluded_optimizer_run, unprofitable","names":"COURT-2026-07-23-HYPE-IBS-MeanRev-4h-Current365, COURT-2026-07-23-HYPE-IBS-MeanRev-4h-PreviousOOS, HYPE IBS MeanRev 4h, SMOKE-2026-07-22 HYPE IBS MeanRev 4h, COURT-2026-07-22 HYPE IBS 4h 30d, COURT-2026-07-22 HYPE IBS 4h 90d, COURT-2026-07-22 HYPE IBS 4h 120d, COURT-2026-07-22 HYPE IBS 4h current 365d, COURT-2026-07-22 HYPE IBS 4h OOS 365d truncated, COURT-2026-07-22 HYPE IBS 4h 120d slippage staircase, OPT-2026-07-22 HYPE IBS 4h 120d grid best, OPT-2026-07-22 HYPE IBS 4h current365 retest, OPT-2026-07-22 HYPE IBS 4h OOS-clamped retest, SMOKE-2026-07-23 HYPE IBS MeanRev 4h"},
     {"fingerprint":"HYPEUSDT|240|other|none","count":1,"verdicts":"profitable_only","names":"COURT-2026-07-22 HYPE BuyHold 4h forced-close references"},
     {"fingerprint":"HYPEUSDT|60|other|atr,macd,sma","count":1,"verdicts":"credible","names":"SMOKE-2026-07-13 HYPE MACD Histogram Zero Cross 1h"},
     {"fingerprint":"ORDIUSDT|5|trend_following|adx,atr,sma,supertrend","count":1,"verdicts":"credible","names":"ORDI 5m Q-Trend v3 (Original p=30 mult=1.2)"},
