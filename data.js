@@ -1,13 +1,13 @@
 // StrategyFactory Quant Lab — data snapshot
 // Generated from live trader.dev pulls (list_strategies, get_strategy, backtest results)
 const QL_DATA = {
-  generatedAt: "2026-07-23T18:01:48Z",
+  generatedAt: "2026-07-24T06:00:56Z",
   portfolio: {
     liveBots: 3,
     paperBots: 1,
     candidatesThisWeek: 8,
     rejectedThisWeek: 6,
-    creditsRemaining: 1277,
+    creditsRemaining: 1263,
   },
   bots: [
     { id: "zec-ut-p5", name: "ZEC UT P5", symbol: "ZECUSDT", tf: "15m", status: "active", tier: "live",
@@ -137,49 +137,281 @@ const QL_DATA = {
   // Fingerprint register from Trading Brain Vault (Home.md "Schon getestet") — Symbol|TF|Kategorie|Indikatoren
   // Source of truth for what's already been tested, to avoid repeating backtest ideas in a loop.
   alreadyTried: [
-    {"fingerprint":"1000BONKUSDT|15|breakout|atr,ema,keltner,sma","count":1,"verdicts":"unprofitable","names":"RESEARCH-2026-07-09-BONK-SqueezeBreakout"},
-    {"fingerprint":"AVAXUSDT|240|mean_reversion|none","count":3,"verdicts":"credible, unprofitable","names":"SMOKE-2026-07-13 Ultimate Oscillator MR AVAX 4h, DEEP-2026-07-13 UO MR AVAX 4h Current 365d, DEEP-2026-07-13 UO MR AVAX 4h Previous 365d"},
-    {"fingerprint":"AVAXUSDT|30|trend_following|atr,ema","count":1,"verdicts":"unprofitable","names":"SMOKE-2026-07-12 AVAX VH 30m Daytrade"},
-    {"fingerprint":"AVAXUSDT|60|mean_reversion|adx,atr,bollinger,rsi","count":2,"verdicts":"credible, unprofitable","names":"SMOKE-2026-07-13 BB MR ADX AVAX 1h, DEEP-2026-07-13 BB MR ADX AVAX 1h Current 365d"},
-    {"fingerprint":"AVAXUSDT|60|mean_reversion|adx,atr,ema,keltner,rsi","count":2,"verdicts":"credible, unprofitable","names":"SMOKE-2026-07-13 Keltner MR ADX AVAX 1h, DEEP-2026-07-13 Keltner MR ADX AVAX 1h Current 365d"},
-    {"fingerprint":"AVAXUSDT|60|trend_following|atr,ema,sma","count":1,"verdicts":"unprofitable","names":"SMOKE-2026-07-13 Spectral AVAX F29 1h"},
-    {"fingerprint":"AVAXUSDT|60|trend_following|ema,sma","count":1,"verdicts":"unprofitable","names":"SMOKE-2026-07-13 Spectral AVAX F19 F41 1h"},
-    {"fingerprint":"BNBUSDT|240|mean_reversion|atr,cmf,ema,keltner,rsi,vwma","count":1,"verdicts":"unprofitable","names":"RESEARCH-2026-07-11-BNB-LiquidityReclaim"},
-    {"fingerprint":"BTCUSDT|240|breakout|atr,donchian","count":1,"verdicts":"excluded_optimizer_run","names":"Vol Squeeze-Release Breakout BTC 4h (Research Desk #2)"},
-    {"fingerprint":"BTCUSDT|240|breakout|atr,donchian,ema","count":2,"verdicts":"profitable_only, unprofitable","names":"SMOKE-2026-07-16 BTC 4h Donchian Trend FINAL, SMOKE-2026-07-22 BTC 4h Donchian Trend FINAL"},
-    {"fingerprint":"BTCUSDT|240|trend_following|atr,donchian,sma","count":1,"verdicts":"unprofitable","names":"SMOKE-2026-07-14 TM Donchian Breakout BTC 4h"},
-    {"fingerprint":"BTCUSDT|240|trend_following|atr,ema,trailing_stop","count":2,"verdicts":"unprofitable","names":"SMOKE-2026-07-12 EMA200 Trend 4h RiskSized BTC, SMOKE-2026-07-16 BTC 4h EMA200 Trend RiskSized"},
-    {"fingerprint":"BTCUSDT|60|breakout|bollinger,sma","count":2,"verdicts":"profitable_only","names":"SMOKE-2026-07-12 BB Squeeze Breakout BTC 1h, DEEP-2026-07-12 BB Squeeze Breakout BTC 1h"},
-    {"fingerprint":"BTCUSDT|60|breakout|donchian,trailing_stop","count":1,"verdicts":"unprofitable","names":"SMOKE-2026-07-23 BTC 1h Donchian160 SAR-trail"},
-    {"fingerprint":"BTCUSDT|60|mean_reversion|bollinger,rsi","count":1,"verdicts":"profitable_only","names":"BTC Mean-Reversion Bollinger+RSI (Original)"},
-    {"fingerprint":"BTCUSDT|60|mean_reversion|none","count":1,"verdicts":"excluded_optimizer_run","names":"BTC Mean-Reversion Bollinger+RSI (Optimiert, 13 Trades)"},
-    {"fingerprint":"BTCUSDT|60|momentum|ema,rsi","count":1,"verdicts":"unprofitable","names":"BTC Momentum EMA Crossover 20/50 + RSI"},
-    {"fingerprint":"BTCUSDT|60|trend_following|adx,atr,ema,rsi,trailing_stop","count":2,"verdicts":"credible, profitable_only","names":"SMOKE-2026-07-12 BTC V7 RSI DI Chandelier, DEEP-2026-07-12 BTC V7 RSI DI Chandelier"},
-    {"fingerprint":"BTCUSDT|60|trend_following|adx,ema,keltner,trailing_stop","count":1,"verdicts":"unprofitable","names":"SMOKE-2026-07-14 BTC 1H KAMA Regime Trend Robust 10x"},
-    {"fingerprint":"BTCUSDT|?|breakout|adx,donchian","count":1,"verdicts":"credible","names":"TF-DonchianADX-v8 (Browse-Katalog)"},
-    {"fingerprint":"BTCUSDT|?|other|none","count":1,"verdicts":"credible","names":"BTC Candle Range Theory (Browse-Katalog)"},
-    {"fingerprint":"DOGEUSDT|240|mean_reversion|chaikin","count":1,"verdicts":"credible","names":"DOGE Chaikin Z-Score MR v2 (Browse-Katalog)"},
-    {"fingerprint":"DOGEUSDT|240|trend_following|atr,ema","count":1,"verdicts":"profitable_only","names":"SMOKE-2026-07-16 DOGE 4h EMA Trend ATR Bracket"},
-    {"fingerprint":"DOGEUSDT|240|trend_following|atr,ema,supertrend","count":2,"verdicts":"profitable_only","names":"SMOKE-2026-07-22 DOGE 4h Supertrend Trend Rider, SMOKE-2026-07-23 DOGE 4h Supertrend Trend Rider"},
-    {"fingerprint":"ETHUSDT|60|other|adx,atr,ema","count":1,"verdicts":"credible","names":"SMOKE-2026-07-12 F40D-ADX ETH 1H"},
-    {"fingerprint":"ETHUSDT|60|other|atr","count":1,"verdicts":"unprofitable","names":"SMOKE-2026-07-23 ETH Liquidity Swing v5 Optimized public"},
-    {"fingerprint":"ETHUSDT|60|other|none","count":2,"verdicts":"credible, excluded_optimizer_run","names":"Realized-Vol Risk Overlay -- Liquidity Swing v5 (90pct/0.5x, LIVE DEPLOYED), Realized-Vol Risk Overlay -- Hilbert F36 (extra dampening, ZURUECKGESTELLT)"},
-    {"fingerprint":"HYPEUSDT|15|other|adx,t3","count":1,"verdicts":"credible","names":"HYPE DemonDays PH Cross ADX-DI Filter (Browse-Katalog)"},
-    {"fingerprint":"HYPEUSDT|15|other|none","count":1,"verdicts":"credible","names":"HYPE UT P5 (Cross-Coin-Test, identischer Code)"},
-    {"fingerprint":"HYPEUSDT|240|mean_reversion|atr,ibs,sma","count":14,"verdicts":"credible, excluded_optimizer_run, unprofitable","names":"COURT-2026-07-23-HYPE-IBS-MeanRev-4h-Current365, COURT-2026-07-23-HYPE-IBS-MeanRev-4h-PreviousOOS, HYPE IBS MeanRev 4h, SMOKE-2026-07-22 HYPE IBS MeanRev 4h, COURT-2026-07-22 HYPE IBS 4h 30d, COURT-2026-07-22 HYPE IBS 4h 90d, COURT-2026-07-22 HYPE IBS 4h 120d, COURT-2026-07-22 HYPE IBS 4h current 365d, COURT-2026-07-22 HYPE IBS 4h OOS 365d truncated, COURT-2026-07-22 HYPE IBS 4h 120d slippage staircase, OPT-2026-07-22 HYPE IBS 4h 120d grid best, OPT-2026-07-22 HYPE IBS 4h current365 retest, OPT-2026-07-22 HYPE IBS 4h OOS-clamped retest, SMOKE-2026-07-23 HYPE IBS MeanRev 4h"},
-    {"fingerprint":"HYPEUSDT|240|other|none","count":1,"verdicts":"profitable_only","names":"COURT-2026-07-22 HYPE BuyHold 4h forced-close references"},
-    {"fingerprint":"HYPEUSDT|60|other|atr,macd,sma","count":1,"verdicts":"credible","names":"SMOKE-2026-07-13 HYPE MACD Histogram Zero Cross 1h"},
-    {"fingerprint":"ORDIUSDT|5|trend_following|adx,atr,sma,supertrend","count":1,"verdicts":"credible","names":"ORDI 5m Q-Trend v3 (Original p=30 mult=1.2)"},
-    {"fingerprint":"SOLUSDT|240|momentum|atr,sma","count":1,"verdicts":"unprofitable","names":"SMOKE-2026-07-14 SOL ARM 4H TV-window PF2 sweep"},
-    {"fingerprint":"SOLUSDT|240|trend_following|atr,ema,sma,trailing_stop","count":3,"verdicts":"profitable_only, unprofitable","names":"SMOKE-2026-07-15 SOL 4h OBV ForceIndex, SMOKE-2026-07-16 SOL 4h OBV ForceIndex, SMOKE-2026-07-22 SOL 4h OBV ForceIndex"},
-    {"fingerprint":"SOLUSDT|5|other|none","count":1,"verdicts":"credible","names":"SMOKE-2026-07-13 PanicFade SOL 5m v2"},
-    {"fingerprint":"SOLUSDT|60|mean_reversion|adx,atr,bollinger,chaikin,cmf,sma","count":1,"verdicts":"unprofitable","names":"DEEP-2026-07-13 CMF MR ADX SOL 1h Current 365d"},
-    {"fingerprint":"SOLUSDT|60|mean_reversion|adx,atr,bollinger,cmf,sma","count":1,"verdicts":"credible","names":"SMOKE-2026-07-13 CMF MR ADX SOL 1h"},
-    {"fingerprint":"SOLUSDT|60|mean_reversion|atr,ema","count":2,"verdicts":"credible, profitable_only","names":"SMOKE-2026-07-13 Elder Ray MR SOL 1h Shorts Only, DEEP-2026-07-13 Elder Ray SOL 1h Current 365d"},
-    {"fingerprint":"WIFUSDT|15|momentum|atr,macd","count":1,"verdicts":"unprofitable","names":"RESEARCH-2026-07-10-WIF-MomentumThrust"},
-    {"fingerprint":"ZECUSDT|15|other|ema,rsi,trailing_stop","count":1,"verdicts":"credible","names":"ZEC UT P5 (Original Compounding)"},
-    {"fingerprint":"ZECUSDT|15|other|none","count":1,"verdicts":"credible","names":"ZEC UT P5 (Out-of-Sample Verify)"},
-    {"fingerprint":"ZECUSDT|15|trend_following|trailing_stop","count":1,"verdicts":"excluded_optimizer_run","names":"Realized-Vol Risk Overlay -- ZEC UT P5 (rekalibriert, VERWORFEN)"},
-    {"fingerprint":"ZECUSDT|240|breakout|none","count":1,"verdicts":"profitable_only","names":"Vol Squeeze-Release Breakout ZEC 4h (Bugfix-Vergleich)"}
+      {
+          "fingerprint": "1000BONKUSDT|15|breakout|atr,ema,keltner,sma",
+          "count": 1,
+          "verdicts": "unprofitable",
+          "names": "RESEARCH-2026-07-09-BONK-SqueezeBreakout"
+      },
+      {
+          "fingerprint": "AVAXUSDT|240|mean_reversion|none",
+          "count": 3,
+          "verdicts": "credible, unprofitable",
+          "names": "SMOKE-2026-07-13 Ultimate Oscillator MR AVAX 4h, DEEP-2026-07-13 UO MR AVAX 4h Current 365d, DEEP-2026-07-13 UO MR AVAX 4h Previous 365d"
+      },
+      {
+          "fingerprint": "AVAXUSDT|30|trend_following|atr,ema",
+          "count": 1,
+          "verdicts": "unprofitable",
+          "names": "SMOKE-2026-07-12 AVAX VH 30m Daytrade"
+      },
+      {
+          "fingerprint": "AVAXUSDT|60|mean_reversion|adx,atr,bollinger,rsi",
+          "count": 2,
+          "verdicts": "credible, unprofitable",
+          "names": "SMOKE-2026-07-13 BB MR ADX AVAX 1h, DEEP-2026-07-13 BB MR ADX AVAX 1h Current 365d"
+      },
+      {
+          "fingerprint": "AVAXUSDT|60|mean_reversion|adx,atr,ema,keltner,rsi",
+          "count": 2,
+          "verdicts": "credible, unprofitable",
+          "names": "SMOKE-2026-07-13 Keltner MR ADX AVAX 1h, DEEP-2026-07-13 Keltner MR ADX AVAX 1h Current 365d"
+      },
+      {
+          "fingerprint": "AVAXUSDT|60|trend_following|atr,ema,sma",
+          "count": 1,
+          "verdicts": "unprofitable",
+          "names": "SMOKE-2026-07-13 Spectral AVAX F29 1h"
+      },
+      {
+          "fingerprint": "AVAXUSDT|60|trend_following|ema,sma",
+          "count": 1,
+          "verdicts": "unprofitable",
+          "names": "SMOKE-2026-07-13 Spectral AVAX F19 F41 1h"
+      },
+      {
+          "fingerprint": "BNBUSDT|240|mean_reversion|atr,cmf,ema,keltner,rsi,vwma",
+          "count": 1,
+          "verdicts": "unprofitable",
+          "names": "RESEARCH-2026-07-11-BNB-LiquidityReclaim"
+      },
+      {
+          "fingerprint": "BNBUSDT|60|other|atr,ema,rsi",
+          "count": 1,
+          "verdicts": "unprofitable",
+          "names": "SMOKE-2026-07-24-BNB-NixMaxV2-1h-120d"
+      },
+      {
+          "fingerprint": "BTCUSDT|240|breakout|atr,donchian",
+          "count": 1,
+          "verdicts": "excluded_optimizer_run",
+          "names": "Vol Squeeze-Release Breakout BTC 4h (Research Desk #2)"
+      },
+      {
+          "fingerprint": "BTCUSDT|240|breakout|atr,donchian,ema",
+          "count": 2,
+          "verdicts": "profitable_only, unprofitable",
+          "names": "SMOKE-2026-07-16 BTC 4h Donchian Trend FINAL, SMOKE-2026-07-22 BTC 4h Donchian Trend FINAL"
+      },
+      {
+          "fingerprint": "BTCUSDT|240|trend_following|atr,donchian,sma",
+          "count": 1,
+          "verdicts": "unprofitable",
+          "names": "SMOKE-2026-07-14 TM Donchian Breakout BTC 4h"
+      },
+      {
+          "fingerprint": "BTCUSDT|240|trend_following|atr,ema,trailing_stop",
+          "count": 2,
+          "verdicts": "unprofitable",
+          "names": "SMOKE-2026-07-12 EMA200 Trend 4h RiskSized BTC, SMOKE-2026-07-16 BTC 4h EMA200 Trend RiskSized"
+      },
+      {
+          "fingerprint": "BTCUSDT|60|breakout|bollinger,sma",
+          "count": 2,
+          "verdicts": "profitable_only",
+          "names": "SMOKE-2026-07-12 BB Squeeze Breakout BTC 1h, DEEP-2026-07-12 BB Squeeze Breakout BTC 1h"
+      },
+      {
+          "fingerprint": "BTCUSDT|60|breakout|donchian,trailing_stop",
+          "count": 1,
+          "verdicts": "unprofitable",
+          "names": "SMOKE-2026-07-23 BTC 1h Donchian160 SAR-trail"
+      },
+      {
+          "fingerprint": "BTCUSDT|60|mean_reversion|bollinger,rsi",
+          "count": 1,
+          "verdicts": "profitable_only",
+          "names": "BTC Mean-Reversion Bollinger+RSI (Original)"
+      },
+      {
+          "fingerprint": "BTCUSDT|60|mean_reversion|none",
+          "count": 1,
+          "verdicts": "excluded_optimizer_run",
+          "names": "BTC Mean-Reversion Bollinger+RSI (Optimiert, 13 Trades)"
+      },
+      {
+          "fingerprint": "BTCUSDT|60|momentum|ema,rsi",
+          "count": 1,
+          "verdicts": "unprofitable",
+          "names": "BTC Momentum EMA Crossover 20/50 + RSI"
+      },
+      {
+          "fingerprint": "BTCUSDT|60|trend_following|adx,atr,ema,rsi,trailing_stop",
+          "count": 2,
+          "verdicts": "credible, profitable_only",
+          "names": "SMOKE-2026-07-12 BTC V7 RSI DI Chandelier, DEEP-2026-07-12 BTC V7 RSI DI Chandelier"
+      },
+      {
+          "fingerprint": "BTCUSDT|60|trend_following|adx,ema,keltner,trailing_stop",
+          "count": 1,
+          "verdicts": "unprofitable",
+          "names": "SMOKE-2026-07-14 BTC 1H KAMA Regime Trend Robust 10x"
+      },
+      {
+          "fingerprint": "BTCUSDT|?|breakout|adx,donchian",
+          "count": 1,
+          "verdicts": "credible",
+          "names": "TF-DonchianADX-v8 (Browse-Katalog)"
+      },
+      {
+          "fingerprint": "BTCUSDT|?|other|none",
+          "count": 1,
+          "verdicts": "credible",
+          "names": "BTC Candle Range Theory (Browse-Katalog)"
+      },
+      {
+          "fingerprint": "DOGEUSDT|240|mean_reversion|chaikin",
+          "count": 1,
+          "verdicts": "credible",
+          "names": "DOGE Chaikin Z-Score MR v2 (Browse-Katalog)"
+      },
+      {
+          "fingerprint": "DOGEUSDT|240|trend_following|atr,ema",
+          "count": 1,
+          "verdicts": "profitable_only",
+          "names": "SMOKE-2026-07-16 DOGE 4h EMA Trend ATR Bracket"
+      },
+      {
+          "fingerprint": "DOGEUSDT|240|trend_following|atr,ema,supertrend",
+          "count": 3,
+          "verdicts": "profitable_only",
+          "names": "SMOKE-2026-07-24-DOGE-SupertrendTrendRider-4h-120d, SMOKE-2026-07-22 DOGE 4h Supertrend Trend Rider, SMOKE-2026-07-23 DOGE 4h Supertrend Trend Rider"
+      },
+      {
+          "fingerprint": "ETHUSDT|60|other|adx,atr,ema",
+          "count": 1,
+          "verdicts": "credible",
+          "names": "SMOKE-2026-07-12 F40D-ADX ETH 1H"
+      },
+      {
+          "fingerprint": "ETHUSDT|60|other|atr",
+          "count": 2,
+          "verdicts": "unprofitable",
+          "names": "SMOKE-2026-07-24-ETH-LiquiditySwingLineage-1h-120d, SMOKE-2026-07-23 ETH Liquidity Swing v5 Optimized public"
+      },
+      {
+          "fingerprint": "ETHUSDT|60|other|none",
+          "count": 2,
+          "verdicts": "credible, excluded_optimizer_run",
+          "names": "Realized-Vol Risk Overlay -- Liquidity Swing v5 (90pct/0.5x, LIVE DEPLOYED), Realized-Vol Risk Overlay -- Hilbert F36 (extra dampening, ZURUECKGESTELLT)"
+      },
+      {
+          "fingerprint": "HYPEUSDT|15|other|adx,t3",
+          "count": 1,
+          "verdicts": "credible",
+          "names": "HYPE DemonDays PH Cross ADX-DI Filter (Browse-Katalog)"
+      },
+      {
+          "fingerprint": "HYPEUSDT|15|other|none",
+          "count": 1,
+          "verdicts": "credible",
+          "names": "HYPE UT P5 (Cross-Coin-Test, identischer Code)"
+      },
+      {
+          "fingerprint": "HYPEUSDT|240|mean_reversion|atr,ibs,sma",
+          "count": 14,
+          "verdicts": "credible, excluded_optimizer_run, unprofitable",
+          "names": "COURT-2026-07-23-HYPE-IBS-MeanRev-4h-Current365, COURT-2026-07-23-HYPE-IBS-MeanRev-4h-PreviousOOS, HYPE IBS MeanRev 4h, SMOKE-2026-07-22 HYPE IBS MeanRev 4h, COURT-2026-07-22 HYPE IBS 4h 30d, COURT-2026-07-22 HYPE IBS 4h 90d, COURT-2026-07-22 HYPE IBS 4h 120d, COURT-2026-07-22 HYPE IBS 4h current 365d, COURT-2026-07-22 HYPE IBS 4h OOS 365d truncated, COURT-2026-07-22 HYPE IBS 4h 120d slippage staircase, OPT-2026-07-22 HYPE IBS 4h 120d grid best, OPT-2026-07-22 HYPE IBS 4h current365 retest, OPT-2026-07-22 HYPE IBS 4h OOS-clamped retest, SMOKE-2026-07-23 HYPE IBS MeanRev 4h"
+      },
+      {
+          "fingerprint": "HYPEUSDT|240|other|none",
+          "count": 1,
+          "verdicts": "profitable_only",
+          "names": "COURT-2026-07-22 HYPE BuyHold 4h forced-close references"
+      },
+      {
+          "fingerprint": "HYPEUSDT|60|other|atr,macd,sma",
+          "count": 1,
+          "verdicts": "credible",
+          "names": "SMOKE-2026-07-13 HYPE MACD Histogram Zero Cross 1h"
+      },
+      {
+          "fingerprint": "ORDIUSDT|5|trend_following|adx,atr,sma,supertrend",
+          "count": 1,
+          "verdicts": "credible",
+          "names": "ORDI 5m Q-Trend v3 (Original p=30 mult=1.2)"
+      },
+      {
+          "fingerprint": "SOLUSDT|240|momentum|atr,sma",
+          "count": 1,
+          "verdicts": "unprofitable",
+          "names": "SMOKE-2026-07-14 SOL ARM 4H TV-window PF2 sweep"
+      },
+      {
+          "fingerprint": "SOLUSDT|240|trend_following|atr,ema,sma,trailing_stop",
+          "count": 3,
+          "verdicts": "profitable_only, unprofitable",
+          "names": "SMOKE-2026-07-15 SOL 4h OBV ForceIndex, SMOKE-2026-07-16 SOL 4h OBV ForceIndex, SMOKE-2026-07-22 SOL 4h OBV ForceIndex"
+      },
+      {
+          "fingerprint": "SOLUSDT|5|other|none",
+          "count": 1,
+          "verdicts": "credible",
+          "names": "SMOKE-2026-07-13 PanicFade SOL 5m v2"
+      },
+      {
+          "fingerprint": "SOLUSDT|60|breakout|atr,bollinger,donchian,sma",
+          "count": 1,
+          "verdicts": "profitable_only",
+          "names": "SMOKE-2026-07-24-SOL-VolCompressionDonchianBreakout-1h-120d"
+      },
+      {
+          "fingerprint": "SOLUSDT|60|mean_reversion|adx,atr,bollinger,chaikin,cmf,sma",
+          "count": 1,
+          "verdicts": "unprofitable",
+          "names": "DEEP-2026-07-13 CMF MR ADX SOL 1h Current 365d"
+      },
+      {
+          "fingerprint": "SOLUSDT|60|mean_reversion|adx,atr,bollinger,cmf,sma",
+          "count": 1,
+          "verdicts": "credible",
+          "names": "SMOKE-2026-07-13 CMF MR ADX SOL 1h"
+      },
+      {
+          "fingerprint": "SOLUSDT|60|mean_reversion|atr,ema",
+          "count": 2,
+          "verdicts": "credible, profitable_only",
+          "names": "SMOKE-2026-07-13 Elder Ray MR SOL 1h Shorts Only, DEEP-2026-07-13 Elder Ray SOL 1h Current 365d"
+      },
+      {
+          "fingerprint": "WIFUSDT|15|momentum|atr,macd",
+          "count": 1,
+          "verdicts": "unprofitable",
+          "names": "RESEARCH-2026-07-10-WIF-MomentumThrust"
+      },
+      {
+          "fingerprint": "ZECUSDT|15|other|ema,rsi,trailing_stop",
+          "count": 1,
+          "verdicts": "credible",
+          "names": "ZEC UT P5 (Original Compounding)"
+      },
+      {
+          "fingerprint": "ZECUSDT|15|other|none",
+          "count": 1,
+          "verdicts": "credible",
+          "names": "ZEC UT P5 (Out-of-Sample Verify)"
+      },
+      {
+          "fingerprint": "ZECUSDT|15|trend_following|trailing_stop",
+          "count": 1,
+          "verdicts": "excluded_optimizer_run",
+          "names": "Realized-Vol Risk Overlay -- ZEC UT P5 (rekalibriert, VERWORFEN)"
+      },
+      {
+          "fingerprint": "ZECUSDT|240|breakout|none",
+          "count": 1,
+          "verdicts": "profitable_only",
+          "names": "Vol Squeeze-Release Breakout ZEC 4h (Bugfix-Vergleich)"
+      }
   ],
 };
